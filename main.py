@@ -1,26 +1,35 @@
 import customtkinter as ctk
+from element.button import Button 
+from element.label  import Label
+from element.input  import Input
 
-class CTkCode(ctk.CTkFrame):
-    """Widget khusus untuk input kode/teks monospaced"""
-    def __init__(self, master, **kwargs):
-        super().__init__(master, fg_color="transparent")
+class App(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+        self.geometry("400x200")
+        self.title("this is a panel")
+
+        # label
+        self.label = Label(self, "Ender Eye 1: ", width=120).RowColumn(1,0)       
+        self.label = Label(self, "Ender Eye 2: ", width=120).RowColumn(2,0)
         
-        self.entry = ctk.CTkEntry(
-            self, 
-            font=("Courier New", 14), 
-            **kwargs
-        )
-        self.entry.pack(fill="x", expand=True)
+        Label(self, "Coord X", width=70).RowColumn(0,1)
+        Label(self, "Coord Y", width=70).RowColumn(0,2)
+        Label(self, "Radient", width=70).RowColumn(0,3)
 
-    def get(self):
-        return self.entry.get()
+        # Input 
+        self.coordX1 = Input(self, width=70, bg_color="#0ff", corner_radius=1, border_width=1).RowColumn(1, 1)
+        self.coordY1 = Input(self, width=70, bg_color="#0ff", corner_radius=1, border_width=1).RowColumn(1, 2)
+        self.radius1 = Input(self, width=70, bg_color="#0ff", corner_radius=1, border_width=1).RowColumn(1, 3)
+        
+        self.coordX2 = Input(self, width=70, bg_color="#0ff", corner_radius=1, border_width=1).RowColumn(2, 1)
+        self.coordY2 = Input(self, width=70, bg_color="#0ff", corner_radius=1, border_width=1).RowColumn(2, 2)
+        self.radius2 = Input(self, width=70, bg_color="#0ff", corner_radius=1, border_width=1).RowColumn(2, 3)
+        
+        # # Button 
+        # self.btn3 = Button(self, width=100).RowColumn(3, 0)
+        # self.btn4 = Button(self, width=150).RowColumn(3, 1)
 
-# Penggunaan
-app = ctk.CTk()
-app.geometry("400x200")
-
-# Menggunakan widget kustom kita
-code_input = CTkCode(app, placeholder_text="Masukkan kode di sini...")
-code_input.pack(pady=20, padx=20, fill="x")
-
-app.mainloop()
+if __name__ == "__main__":
+    app = App()
+    app.mainloop()

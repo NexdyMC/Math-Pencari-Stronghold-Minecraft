@@ -1,12 +1,13 @@
 import customtkinter as ctk
 
-class Input(ctk.CTkEntry):
+class Panel(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
-
+        
         self.configure(
-            placeholder_text="Masukkan nama",
-            width=200
+            fg_color="#1ff",
+            # bg_color="#1ff",
+            corner_radius=999
         )
 
 class App(ctk.CTk):
@@ -16,8 +17,9 @@ class App(ctk.CTk):
         self.geometry("400x200")
         self.title("Project Website")
 
-        self.input = Input(self)
-        self.input.pack(pady=20)
+        self.input = Panel(self)
+        self.input.pack(fill="x",expand=True)
+
 
 if __name__ == "__main__":
     app = App()
