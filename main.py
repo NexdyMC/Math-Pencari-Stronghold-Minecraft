@@ -1,28 +1,26 @@
-# main.py
 import customtkinter as ctk
-import customtkinter.CTkEntry as CTkEntry
-import customtkinter.CTkLabel as CTkLabel
 
-def main():
-    ctk.set_appearance_mode("dark")  # opsi: "light", "dark", "system"
-    root = ctk.CTk()
-    root.title("Demo CustomTkinter")
+class CTkCode(ctk.CTkFrame):
+    """Widget khusus untuk input kode/teks monospaced"""
+    def __init__(self, master, **kwargs):
+        super().__init__(master, fg_color="transparent")
+        
+        self.entry = ctk.CTkEntry(
+            self, 
+            font=("Courier New", 14), 
+            **kwargs
+        )
+        self.entry.pack(fill="x", expand=True)
 
-    entry = CTkEntry(root, placeholder_text="Masukkan nama")
-    entry.pack(padx=20, pady=20)
+    def get(self):
+        return self.entry.get()
 
-    label = CTkLabel(root, text="Selamat datang!")
-    label.pack(padx=20, pady=20)
+# Penggunaan
+app = ctk.CTk()
+app.geometry("400x200")
 
-    root.mainloop()
+# Menggunakan widget kustom kita
+code_input = CTkCode(app, placeholder_text="Masukkan kode di sini...")
+code_input.pack(pady=20, padx=20, fill="x")
 
-if __name__ == "__main__":
-    main()
-
-# echo "# apk-android-python" >> README.md 
-# git init 
-# git add README.md 
-# git commit -m "first commit" 
-# git branch -M main 
-# git remote add origin https://github.com/NexdyMC/apk-android-python.git
-#  git push -u origin main
+app.mainloop()
