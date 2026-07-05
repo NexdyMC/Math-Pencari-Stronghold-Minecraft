@@ -10,8 +10,13 @@ class Input(ctk.CTkEntry):
             # width=200,
         )
     
-    def RowColumn(self, row=0, column=0):
-        self.grid(row=row, column=column, sticky="w")
+    def RowColumn(self, row=0, column=0, sticky="w"):
+        self.grid(row=row, column=column, sticky=sticky)
+        return self  # <--- TAMBAHKAN INI
+
+    def Padding(self, padx=0, pady=0):
+        self.grid(padx=padx, pady=pady)
+        return self  # <--- TAMBAHKAN INI
 
 
 

@@ -1,0 +1,9 @@
+QLabel {
+    background-color: red;
+    padding: 20px;
+    color: #fff;
+}
+
+QLabel#title {
+    font-size: 20px;
+}

@@ -15,6 +15,11 @@ class Label(ctk.CTkLabel):
 
     def RowColumn(self, row=0, column=0):
         self.grid(row=row, column=column, sticky="w")
+    
+    def Span(self, rowspan=0, columnspan=0):
+        self.grid(rowspan=rowspan, columnspan=columnspan)
+        return self  # <--- TAMBAHKAN INI
+
 
 class App(ctk.CTk):
     def __init__(self):

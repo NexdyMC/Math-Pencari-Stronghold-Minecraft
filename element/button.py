@@ -16,6 +16,15 @@ class Button(ctk.CTkButton):
     
     def RowColumn(self, row=0, column=0):
         self.grid(row=row, column=column)
+    
+    # def ShortCut(self)
+        # | Enter	        | <Return>
+        # | Ctrl + V	    | <Control-v>
+        # | Ctrl + S	    | <Control-s>
+        # | Esc             | <Escape>
+        # | F1 - F12	    | <F1>, <F2>, dst.
+        # | Panah top	    | <Up>
+        # | Shift + Enter	| <Shift-Return>
 
 # class App(ctk.CTk):
 #     def __init__(self):
