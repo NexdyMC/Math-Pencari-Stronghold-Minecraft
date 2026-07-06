@@ -17,7 +17,15 @@ class Input(ctk.CTkEntry):
     def Padding(self, padx=0, pady=0):
         self.grid(padx=padx, pady=pady)
         return self  # <--- TAMBAHKAN INI
+    
+    @property
+    def Value(self):
+        return self.cget("value")
 
+    @Value.setter
+    def Value(self, value):
+        self.configure(textvariable=ctk.StringVar(value=value))
+   
 
 
 class App(ctk.CTk):

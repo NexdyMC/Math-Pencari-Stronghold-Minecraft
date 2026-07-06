@@ -3,7 +3,6 @@ import customtkinter as ctk
 class Label(ctk.CTkLabel):
     def __init__(self, master, text="Label", **kwargs):
         super().__init__(master)
-
         self.configure(
             text=text,
             font=('Minecraft', 16),
@@ -12,26 +11,41 @@ class Label(ctk.CTkLabel):
 
     def text_color(self, text_color="white"):
         self.configure(text_color=text_color)
+        return self
 
-    def RowColumn(self, row=0, column=0):
-        self.grid(row=row, column=column, sticky="w")
+    def RowColumn(self, row=0, column=0, sticky="w"):
+        self.grid(row=row, column=column, sticky=sticky)
+        return self
     
-    def Span(self, rowspan=0, columnspan=0):
-        self.grid(rowspan=rowspan, columnspan=columnspan)
-        return self  # <--- TAMBAHKAN INI
+    def Span(self, rowspan=None, columnspan=None):
+        # Menggunakan grid_configure untuk memperbarui span tanpa reset grid
+        grid_args = {}
+        if rowspan: grid_args['rowspan'] = rowspan
+        if columnspan: grid_args['columnspan'] = columnspan
+        
+        self.grid_configure(**grid_args)
+        return self
 
+    # Tambahan: Property decorator agar bisa pakai .Text = "..."
+    @property
+    def Text(self):
+        return self.cget("text")
 
-class App(ctk.CTk):
-    def __init__(self):
-        super().__init__()
+    @Text.setter
+    def Text(self, value):
+        self.configure(text=value)
 
-        self.geometry("400x400")
-        self.title("Custom Tkinter")
+# class App(ctk.CTk):
+#     def __init__(self):
+#         super().__init__()
 
-        self.label = Label(self, "this is a makanan", bg_color="#0ff").RowColumn(0,0 )
-        # self.label.text_color("blue")
-        # self.label.pack(fill="x")
+#         self.geometry("400x400")
+#         self.title("Custom Tkinter")
 
-if __name__ ==  "__main__":
-    app = App()
-    app.mainloop()
+#         self.label = Label(self, "this is a makanan", bg_color="#0ff").RowColumn(0,0 )
+#         # self.label.text_color("blue")
+#         # self.label.pack(fill="x")
+
+# if __name__ ==  "__main__":
+#     app = App()
+#     app.mainloop()

@@ -14,9 +14,24 @@ class Button(ctk.CTkButton):
     def text_color(self, value="white"):
         self.configure(text_color=value)
     
-    def RowColumn(self, row=0, column=0):
-        self.grid(row=row, column=column)
+    def RowColumn(self, row=0, column=0, sticky="w"):
+        self.grid(row=row, column=column, sticky=sticky)
+        return self  # <--- TAMBAHKAN INI
+
+    def Padding(self, padx=0, pady=0):
+        self.grid(padx=padx, pady=pady)
+        return self  # <--- TAMBAHKAN INI
     
+    
+    @property
+    def Text(self):
+        return self.cget("text")
+
+    @Text.setter
+    def Text(self, value):
+        self.configure(text=value)
+
+
     # def ShortCut(self)
         # | Enter	        | <Return>
         # | Ctrl + V	    | <Control-v>
