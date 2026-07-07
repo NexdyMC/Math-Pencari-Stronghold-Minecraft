@@ -10,16 +10,24 @@ class App(ctk.CTk):
         # self.geometry("400x200")
         self.title("Calculator Stronghold")
         # self.iconbitmap("icon.ico")
+        # self.configure(bg_color="#0ff")
         self.resizable(False, False)
-        
+        # self.grid_columnconfigure(0, weight=1, pad=5) # Padding kiri
+        # self.grid_columnconfigure(2, weight=1, pad=5) # Padding kanan
+        # self.grid_rowconfigure(0, weight=1, pad=5)    # Padding atas
+        # self.grid_rowconfigure(2, weight=1, pad=5)    # Padding bawah
+
+        self.panel_windows = Panel(self)
+        self.panel_windows.grid(row=1, column=1, sticky="nsew")
+
         # Panel Screen
-        self.panel_input = Panel(self, fg_color="#3f3f46")
+        self.panel_input = Panel(self.panel_windows, fg_color="#3f3f46")
         self.panel_input.pack(fill="x", expand=True)
         
-        self.panel_button = Panel(self, fg_color="#000")
+        self.panel_button = Panel(self.panel_windows, fg_color="#000")
         self.panel_button.pack(fill="x", expand=True)
 
-        self.panel_hasil = Panel(self, fg_color="#444")
+        self.panel_hasil = Panel(self.panel_windows, fg_color="#444")
         self.panel_hasil.pack(fill="x", expand=True)
 
 
@@ -66,6 +74,7 @@ class App(ctk.CTk):
         self.btn_remove = Button(self.panel_button, command=self.on_remove_pressed, hover_color="#7f1d1d", fg_color="#b91c1c").RowColumn(3, 1).Padding(2 ,2)
         self.btn_remove.Text = "Reset" 
         # self.bind("<Control-Return>", self.on_remove_pressed)
+        
         
     def on_return_pressed(self):
         self.world_block_x.Text = "-1234"
