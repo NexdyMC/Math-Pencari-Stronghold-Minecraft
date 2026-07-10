@@ -3,6 +3,7 @@ from element.button import Button
 from element.label  import Label
 from element.input  import Input
 from element.panel  import Panel
+import math
 
 class App(ctk.CTk):
     def __init__(self):
@@ -77,10 +78,10 @@ class App(ctk.CTk):
         
         
     def on_return_pressed(self):
-        self.world_block_x.Text = "-1234"
-        self.world_block_y.Text = "-12345"
-        self.world_chunk_x.Text = "-12345"
-        self.world_chunk_y.Text = "-12345"
+        self.world_block_x.Text = self.coordX1.getValue()
+        self.world_block_y.Text = self.coordY1.getValue()
+        self.world_chunk_x.Text = self.coordX2.getValue()
+        self.world_chunk_y.Text = self.coordY2.getValue()
     
         self.nether_block_x.Text = "-12334"
         self.nether_block_y.Text = "-12334"
@@ -98,6 +99,10 @@ class App(ctk.CTk):
         self.nether_chunk_x.Text = ""
         self.nether_chunk_y.Text = ""
 
+    def calculate_stronghold(self, coordX1, coordY1, rad1, coordX2, coordY2, rad2):
+        deg2rad = (math.pi / 180)
+        rad2deg = (180 / math.pi)
+        pass
 
 if __name__ == "__main__":
     app = App()

@@ -34,7 +34,9 @@ class Label(ctk.CTkLabel):
     @Text.setter
     def Text(self, value):
         self.configure(text=value)
-
+    
+    def getValue(self):
+        self.get()
 # class App(ctk.CTk):
 #     def __init__(self):
 #         super().__init__()

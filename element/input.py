@@ -18,6 +18,9 @@ class Input(ctk.CTkEntry):
         self.grid(padx=padx, pady=pady)
         return self  # <--- TAMBAHKAN INI
     
+    def getValue(self):
+        return self.get()
+
     @property
     def Value(self):
         return self.cget("value")
@@ -36,7 +39,11 @@ class App(ctk.CTk):
         self.title("Project Website")
 
         self.input = Input(self).RowColumn(0,0)
+    #     self.button = ctk.CTkButton(self, text="tekan aku", command=self.click_output).grid(row=1, column=1)
+    #     self.label = ctk.CTkLabel(self, text="output").grid(row=2, column=1)
 
+    # def click_output(self):
+    #     self.configure(text="ini hasilnya")
 if __name__ == "__main__":
     app = App()
     app.mainloop()
