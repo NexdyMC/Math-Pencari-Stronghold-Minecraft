@@ -6,8 +6,9 @@ class Input(ctk.CTkEntry):
 
         self.configure(
             font=('Minecraft', 16),
+            corner_radius=0, 
+            border_width=1,
             **kwargs
-            # width=200,
         )
     
     def RowColumn(self, row=0, column=0, sticky="w"):

@@ -17,19 +17,42 @@ class TabView(ctk.CTkFrame):
         self.content = ctk.CTkFrame(self, corner_radius=0)
         self.content.grid(row=1, column=0, sticky="nsew")
 
+    def ButtonTabView(
+        self,
+        font=("Minecraft", 14),
+        fg_color="#334155",
+        hover_color="#475569",
+        text_color="white",
+        width=100,
+        height=32
+    ):
+        self._tab_style = {
+            "font": font,
+            "fg_color": fg_color,
+            "hover_color": hover_color,
+            "text_color": text_color,
+            "width": width,
+            "height": height
+        }
+
+        for tab in self.tabs.values():
+            tab["button"].configure(**self._tab_style)
+
+        return self
+
     def Add(self, name):
 
+        style = getattr(self, "_tab_style", {})
         page = ctk.CTkFrame(self.content)
-
         btn = ctk.CTkButton(
             self.tab_bar,
             text=name,
-            width=120,
             corner_radius=0,
-            command=lambda: self.Show(name)
+            command=lambda: self.Show(name),
+            **style
         )
 
-        btn.pack(side="left")
+        btn.pack(side="left", padx=0, pady=0)
 
         self.tabs[name] = {
             "button": btn,
@@ -53,33 +76,10 @@ class TabView(ctk.CTkFrame):
 
         self.current = name
 
-class App(ctk.CTk):
-    def __init__(self):
-        super().__init__()
+    def RowColumn(self, row=0, column=0, sticky="nsew"):
+        self.grid(row=row, column=column, sticky=sticky)
+        return self
 
-        self.geometry("800x500")
-
-        tabs = TabView(self)
-        tabs.pack(fill="both", expand=True)
-
-        home = tabs.Add("Home")
-        about = tabs.Add("About")
-        settings = tabs.Add("Settings")
-
-        ctk.CTkLabel(
-            home,
-            text="HOME PAGE"
-        ).pack(pady=30)
-
-        ctk.CTkLabel(
-            about,
-            text="ABOUT PAGE"
-        ).pack(pady=30)
-
-        ctk.CTkLabel(
-            settings,
-            text="SETTINGS PAGE"
-        ).pack(pady=30)
-
-
-App().mainloop()
+    def Padding(self, padx=0, pady=0):
+        self.grid(padx=padx, pady=pady)
+        return self
