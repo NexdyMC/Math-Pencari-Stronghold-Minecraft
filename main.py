@@ -86,8 +86,9 @@ class App(ctk.CTk):
         # ============================================================ #
         # ======================== Menu About ======================== #
         # ============================================================ #
-        Label(self.panel_about, text="Username").RowColumn(1, 0)
-        
+        desc_about = "aplikasi yang bisa menghitung karkurasi\n matematik menggunakan metode segitiga derajat "
+        Label(self.panel_about, text="About", anchor="center", width=400).RowColumn(1, 0)
+        Label(self.panel_about, text=desc_about, width=400).RowColumn(2, 0)
         # ============================================================ #
         # ======================== Menu Manual ======================== #
         # ============================================================ #
@@ -102,12 +103,12 @@ class App(ctk.CTk):
         Label(self.tab_manual_input, "Coord Y", width=80).RowColumn(1,2)
         Label(self.tab_manual_input, "Radient", width=80).RowColumn(1,3)
 
-        self.coordX1 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(2, 1).Padding(2, 2)
-        self.coordZ1 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(2, 2).Padding(2, 2)
-        self.angle1 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(2, 3).Padding(2, 2)
-        self.coordX2 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(3, 1).Padding(2, 2)
-        self.coordZ2 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(3, 2).Padding(2, 2)
-        self.angle2 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(3, 3).Padding(2, 2)
+        self.coordX1 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(2, 1)
+        self.coordZ1 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(2, 2)
+        self.angle1 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(2, 3)
+        self.coordX2 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(3, 1)
+        self.coordZ2 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(3, 2)
+        self.angle2 = Input(self.tab_manual_input, width=80, fg_color="#272727").RowColumn(3, 3)
         
 
         # Button : Panel Event : Mode Manual
@@ -162,8 +163,46 @@ class App(ctk.CTk):
         self.nether_chunk_y = Label(self.panel_hasil, "000", width=70, fg_color="#580000").RowColumn(6,4)
         
 
+    def valid_value(self): 
+        pass
         
     def on_return_manual_pressed(self, event=None):
+        point = 0 
+    
+        if self.coordX1.getValue():
+            point += 1
+        else:
+            self.coordX1.Value = "0"
+        
+        if self.coordZ1.getValue():
+            point += 1
+        else:
+            self.coordZ1.Value = "0"
+        
+        if self.angle1.getValue():
+            point += 1
+        else:
+            self.angle1.Value = "0"
+        
+        if self.coordX2.getValue():
+            point += 1
+        else:
+            self.coordX2.Value = "0"
+
+        if self.coordZ2.getValue():
+            point += 1
+        else:
+            self.coordZ2.Value = "0"
+
+        if self.angle2.getValue():
+            point += 1
+        else:
+            self.angle2.Value = "0"
+
+        print(point)
+
+        # if point == 6:
+            
         coordxA = float(self.coordX1.getValue())
         coordzA = float(self.coordZ1.getValue())
         angleA = float(self.angle1.getValue())
