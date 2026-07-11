@@ -1,14 +1,18 @@
 import customtkinter as ctk
 
 class TextBox(ctk.CTkTextbox):
-    def __init__(self, master):
+    def __init__(self, master, **kwargs):
         super().__init__(master)
 
         self.configure(
             fg_color="#fff",
-            text_color="#000"
+            text_color="#000",
+            **kwargs
         )
-
+    
+    def RowColumn(self, row=0, column=0, sticky=""):
+        self.grid(row=row, column=column, sticky=sticky)
+        return self
 
 class App(ctk.CTk):
     def __init__(self):

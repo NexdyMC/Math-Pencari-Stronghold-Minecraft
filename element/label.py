@@ -1,11 +1,11 @@
 import customtkinter as ctk
 
 class Label(ctk.CTkLabel):
-    def __init__(self, master, text="Label", **kwargs):
+    def __init__(self, master, text="Label", font=('Minecraft', 16), **kwargs):
         super().__init__(master)
         self.configure(
             text=text,
-            font=('Minecraft', 16),
+            font=font,
             **kwargs
         )
 
@@ -16,12 +16,17 @@ class Label(ctk.CTkLabel):
     def RowColumn(self, row=0, column=0, sticky="w"):
         self.grid(row=row, column=column, sticky=sticky)
         return self
+
+    def Padding(self, padx=0, pady=0):
+        self.grid(padx=padx, pady=pady)
+        return self  # <--- TAMBAHKAN INI
     
-    def Span(self, rowspan=None, columnspan=None):
+    
+    def Span(self, row=None, column=None):
         # Menggunakan grid_configure untuk memperbarui span tanpa reset grid
         grid_args = {}
-        if rowspan: grid_args['rowspan'] = rowspan
-        if columnspan: grid_args['columnspan'] = columnspan
+        if row: grid_args['rowspan'] = row
+        if column: grid_args['columnspan'] = column
         
         self.grid_configure(**grid_args)
         return self

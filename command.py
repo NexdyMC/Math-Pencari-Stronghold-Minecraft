@@ -3,6 +3,7 @@ from element.button import Button
 from element.label  import Label
 from element.input  import Input
 from element.panel  import Panel
+from element.textbox  import TextBox
 from mate import rumus
 import math
 
@@ -28,40 +29,29 @@ class App(ctk.CTk):
         self.panel_hasil = Panel(self.panel_windows, fg_color="#444")
         self.panel_hasil.pack(fill="x", expand=True)
 
+        # self.boxtext = TextBox(self.panel_input, width=400).RowColumn(0, 0)
+        Label(self.panel_input)
+        Label(self.panel_input, text="Command A").RowColumn(1,0).Padding((4, 10), 0)
+        self.CommandA = Input(self.panel_input, width=300, fg_color="#272727", corner_radius=0, border_width=1).RowColumn(1, 1)
+        Label(self.panel_input, text="Command B").RowColumn(2,0).Padding((4, 10), 0)
+        self.CommandB = Input(self.panel_input, width=300, fg_color="#272727", corner_radius=0, border_width=1).RowColumn(2, 1)
+        Label(self.panel_input, text="Gunakan F3 + C untuk mencopy sebuah perintah", text_color="#070", font=('Minecraft', 14)).RowColumn(3, 0).Span(column=2).Padding(4, 6)
 
-        
-        # # label
-        Label(self.panel_input, "Ender Eye 1: ", width=120).RowColumn(1,0)       
-        Label(self.panel_input, "Ender Eye 2: ", width=120).RowColumn(2,0)
-        
-        Label(self.panel_input, "Coord X", width=80).RowColumn(0,1)
-        Label(self.panel_input, "Coord Y", width=80).RowColumn(0,2)
-        Label(self.panel_input, "Radient", width=80).RowColumn(0,3)
-
-        # Input 
-        self.coordX1 = Input(self.panel_input, width=80, fg_color="#272727", corner_radius=0, border_width=0).RowColumn(1, 1).Padding(2, 2)
-        self.coordZ1 = Input(self.panel_input, width=80, fg_color="#272727", corner_radius=0, border_width=0).RowColumn(1, 2).Padding(2, 2)
-        self.angle1 = Input(self.panel_input, width=80, fg_color="#272727", corner_radius=0, border_width=0).RowColumn(1, 3).Padding(2, 2)
-        
-        self.coordX2 = Input(self.panel_input, width=80, fg_color="#272727", corner_radius=0, border_width=0).RowColumn(2, 1).Padding(2, 2)
-        self.coordZ2 = Input(self.panel_input, width=80, fg_color="#272727", corner_radius=0, border_width=0).RowColumn(2, 2).Padding(2, 2)
-        self.angle2 = Input(self.panel_input, width=80, fg_color="#272727", corner_radius=0, border_width=0).RowColumn(2, 3).Padding(2, 2)
-        
         Label(self.panel_hasil, "Dimension", width=120, fg_color="#0e7490").RowColumn(4,0)
         Label(self.panel_hasil, "Block", width=140, fg_color="#0e7490").RowColumn(4,1).Span(0, 2)
         Label(self.panel_hasil, "Chunk", width=140, fg_color="#0e7490").RowColumn(4,3).Span(0, 2)
         
         Label(self.panel_hasil, "Overworld", width=120, fg_color="#070").RowColumn(5,0)
-        self.world_block_x = Label(self.panel_hasil, "-1200", width=70, fg_color="#112D10").RowColumn(5,1)
-        self.world_block_y = Label(self.panel_hasil, "-2800", width=70, fg_color="#112D10").RowColumn(5,2)
-        self.world_chunk_x = Label(self.panel_hasil, "-2800", width=70, fg_color="#123C10").RowColumn(5,3)
-        self.world_chunk_y = Label(self.panel_hasil, "-2800", width=70, fg_color="#123C10").RowColumn(5,4)
+        self.world_block_x = Label(self.panel_hasil, "000", width=70, fg_color="#112D10").RowColumn(5,1)
+        self.world_block_y = Label(self.panel_hasil, "000", width=70, fg_color="#112D10").RowColumn(5,2)
+        self.world_chunk_x = Label(self.panel_hasil, "000", width=70, fg_color="#123C10").RowColumn(5,3)
+        self.world_chunk_y = Label(self.panel_hasil, "000", width=70, fg_color="#123C10").RowColumn(5,4)
         
         Label(self.panel_hasil, "Nether", width=120, fg_color="#700").RowColumn(6,0)
-        self.nether_block_x = Label(self.panel_hasil, "-2800", width=70, fg_color="#3F0F0B").RowColumn(6,1)
-        self.nether_block_y = Label(self.panel_hasil, "-2800", width=70, fg_color="#3F0F0B").RowColumn(6,2)
-        self.nether_chunk_x = Label(self.panel_hasil, "-2800", width=70, fg_color="#580000").RowColumn(6,3)
-        self.nether_chunk_y = Label(self.panel_hasil, "-2800", width=70, fg_color="#580000").RowColumn(6,4)
+        self.nether_block_x = Label(self.panel_hasil, "000", width=70, fg_color="#3F0F0B").RowColumn(6,1)
+        self.nether_block_y = Label(self.panel_hasil, "000", width=70, fg_color="#3F0F0B").RowColumn(6,2)
+        self.nether_chunk_x = Label(self.panel_hasil, "000", width=70, fg_color="#580000").RowColumn(6,3)
+        self.nether_chunk_y = Label(self.panel_hasil, "000", width=70, fg_color="#580000").RowColumn(6,4)
         
         # # Button 
         self.btn_search = Button(self.panel_button, command=self.on_return_pressed, hover_color="#14532d", fg_color="#166534").RowColumn(3, 0).Padding(2 ,2)
@@ -74,14 +64,13 @@ class App(ctk.CTk):
         
         
     def on_return_pressed(self):
-        coordxA = float(self.coordX1.getValue())
-        coordzA = float(self.coordZ1.getValue())
-        angleA = float(self.angle1.getValue())
-        coordxB = float(self.coordX2.getValue())
-        coordzB = float(self.coordZ2.getValue())
-        angleB = float(self.angle2.getValue())
+        pointA = self.CommandA.getValue().split()
+        pointB = self.CommandB.getValue().split()
 
-        hasil = rumus.coord(coordxA, coordzA, angleA, coordxB, coordzB, angleB)
+        print(f"Point A: {pointA[6]} {pointA[8]} {pointA[9]}")
+        print(f"Point B: {pointB[6]} {pointB[8]} {pointB[9]}")
+
+        hasil = rumus.coord(float(str(pointA[6])), float(str(pointA[8])), float(str(pointA[9])), float(str(pointB[6])), float(str(pointB[8])), float(str(pointB[9])))
         
         overworld_block = rumus.overword_block(hasil[0], hasil[1])
         overworld_chunk = rumus.overword_chunk(hasil[0], hasil[1])
@@ -98,8 +87,10 @@ class App(ctk.CTk):
         self.nether_chunk_x.Text = str(nether_chunk[1])
         self.nether_chunk_y.Text = str(nether_chunk[2])
         
-        
     def on_remove_pressed(self):
+        self.CommandA.Value = ""
+        self.CommandB.Value = ""
+        
         self.world_block_x.Text = ""
         self.world_block_y.Text = ""
         self.world_chunk_x.Text = ""

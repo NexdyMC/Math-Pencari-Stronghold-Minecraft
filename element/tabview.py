@@ -1,48 +1,85 @@
 import customtkinter as ctk
 
-class TabView(ctk.CTkTabview):
-    def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)
 
-    def Radius(self, value):
-        self.configure(corner_radius=value)
-        return self
+class TabView(ctk.CTkFrame):
+    def __init__(self, master):
+        super().__init__(master)
+
+        self.tabs = {}
+        self.current = None
+
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+
+        self.tab_bar = ctk.CTkFrame(self, corner_radius=0)
+        self.tab_bar.grid(row=0, column=0, sticky="ew")
+
+        self.content = ctk.CTkFrame(self, corner_radius=0)
+        self.content.grid(row=1, column=0, sticky="nsew")
 
     def Add(self, name):
-        self.add(name)
-        return self
 
-    def Tab(self, name):
-        return self.tab(name)
+        page = ctk.CTkFrame(self.content)
 
-    def RowColumn(self, row=0, column=0, sticky="nsew"):
-        self.grid(row=row, column=column, sticky=sticky)
-        return self
+        btn = ctk.CTkButton(
+            self.tab_bar,
+            text=name,
+            width=120,
+            corner_radius=0,
+            command=lambda: self.Show(name)
+        )
 
-    def Padding(self, padx=0, pady=0):
-        self.grid(padx=padx, pady=pady)
-        return self
+        btn.pack(side="left")
+
+        self.tabs[name] = {
+            "button": btn,
+            "page": page
+        }
+
+        if self.current is None:
+            self.Show(name)
+
+        return page
+
+    def Show(self, name):
+
+        for tab in self.tabs.values():
+            tab["page"].pack_forget()
+
+        self.tabs[name]["page"].pack(
+            fill="both",
+            expand=True
+        )
+
+        self.current = name
+
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        self.geometry("600x400")
+        self.geometry("800x500")
 
-        self.tabs = (
-            TabView(self)
-            .RowColumn(0, 0)
-            .Padding(10, 10)
-        )
+        tabs = TabView(self)
+        tabs.pack(fill="both", expand=True)
 
-        self.tabs.Add("Home")
-        self.tabs.Add("Settings")
-        self.tabs.Add("About")
+        home = tabs.Add("Home")
+        about = tabs.Add("About")
+        settings = tabs.Add("Settings")
 
         ctk.CTkLabel(
-            self.tabs.Tab("Home"),
-            text="Welcome"
-        ).pack(pady=20)
+            home,
+            text="HOME PAGE"
+        ).pack(pady=30)
+
+        ctk.CTkLabel(
+            about,
+            text="ABOUT PAGE"
+        ).pack(pady=30)
+
+        ctk.CTkLabel(
+            settings,
+            text="SETTINGS PAGE"
+        ).pack(pady=30)
 
 
-if __name__ == "__main__":
-    App().mainloop()
+App().mainloop()

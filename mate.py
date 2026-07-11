@@ -4,6 +4,9 @@ import math
 pointA = "/execute in minecraft:overworld run tp @s 1000.50 87.49 1000.50 -111.13 -31.93"
 pointB = "/execute in minecraft:overworld run tp @s 996.70 83.00 890.30 -81.68 -32.27"
 
+# /execute in minecraft:overworld run tp @s 1000.50 87.49 1000.50 -111.13 -31.93
+# /execute in minecraft:overworld run tp @s 996.70 83.00 890.30 -81.68 -32.27
+
 dataA = pointA.split()
 dataB = pointB.split()
 
@@ -52,11 +55,17 @@ class rumus():
         Z = (clopeA * X) + interceptA
         return math.floor(X), math.floor(Z)
 
-    def overword_chunk(coordX, coordZ):
-        return "Overword Chunk: ", math.floor(coordX), math.floor(coordZ)
+    def overword_block(coordX, coordZ):
+        return "Overword Block: ", math.floor(coordX), math.floor(coordZ)
 
+    def overword_chunk(coordX, coordZ):
+        return "Overword Chunk: ", math.floor(coordX / 16), math.floor(coordZ / 16)
+
+    def nether_block(coordX, coordZ):
+        return "Nether Block: ", math.floor(coordX / 8), math.floor(coordZ / 8)
+    
     def nether_chunk(coordX, coordZ):
-        return f"Nether Chunk: ", math.floor(coordX), math.floor(coordZ)
+        return "Nether Chunk: ", math.floor((coordX / 8) / 16), math.floor((coordZ / 8) / 16)
 
 def calcurator_stronghold(poinxA, poinzA, angleA, poinxB, poinzB, angleB):
     deg2rad = math.pi / 180
@@ -87,15 +96,15 @@ def calcurator_stronghold(poinxA, poinzA, angleA, poinxB, poinzB, angleB):
     Z = (clopeA * X) + interceptA
     return X, Z
 
-def output():
-    return 123, 123
+# def output():
+#     return 123, 123
 
-kelas = rumus.coord(poinxA, poinzA, angleA, poinxB, poinzB, angleB)
-chunk = rumus.overword_chunk(kelas[0], kelas[1])
-print(chunk)
+# kelas = rumus.coord(poinxA, poinzA, angleA, poinxB, poinzB, angleB)
+# chunk = rumus.overword_chunk(kelas[0], kelas[1])
+# print(chunk)
 
-hasil = calcurator_stronghold(poinxA, poinzA, angleA, poinxB, poinzB, angleB)
-print(hasil[0], hasil[1])
+# hasil = calcurator_stronghold(poinxA, poinzA, angleA, poinxB, poinzB, angleB)
+# print(hasil[0], hasil[1])
 
 # print(f"Overword Block: {math.floor(X)}, {math.floor(Z)}")
 # print(f"Overword Chunk: {math.floor(X / 16)}, {math.floor(Z / 16)}")
