@@ -1,32 +1,27 @@
 import customtkinter as ctk
-from element.button import Button 
-from element.label  import Label
-from element.input  import Input
-from element.panel  import Panel
-from element.tabview import TabView
+from element import Button, Label, Input, Panel, TabView
 from mate import rumus
-
 import math
 
-class Screen(ctk.CTk):
-    def InputManual():
-        pass
-    def InputPaste():
-        pass
-    def ButtonManual():
-        pass
-    def ButtonManual():
-        pass
-    def Output():
-        pass
-    def MenuManual():
-        pass
-    def MenuPaste():
-        pass
-    def MenuOption():
-        pass
-    def MenuAbout():
-        pass
+class Screen():
+    def event(self, master):
+        super().__init__(master)
+        Label(self, "Dimension", width=120, fg_color="#0e7490").RowColumn(4,0)
+        Label(self, "Block", width=140, fg_color="#0e7490").RowColumn(4,1).Span(0, 2)
+        Label(self, "Chunk", width=140, fg_color="#0e7490").RowColumn(4,3).Span(0, 2)
+        
+        Label(self, "Overworld", width=120, fg_color="#070").RowColumn(5,0)
+        self.world_block_x = Label(self, "000", width=70, fg_color="#112D10").RowColumn(5,1)
+        self.world_block_y = Label(self, "000", width=70, fg_color="#112D10").RowColumn(5,2)
+        self.world_chunk_x = Label(self, "000", width=70, fg_color="#123C10").RowColumn(5,3)
+        self.world_chunk_y = Label(self, "000", width=70, fg_color="#123C10").RowColumn(5,4)
+        
+        Label(self, "Nether", width=120, fg_color="#700").RowColumn(6,0)
+        self.nether_block_x = Label(self, "000", width=70, fg_color="#3F0F0B").RowColumn(6,1)
+        self.nether_block_y = Label(self, "000", width=70, fg_color="#3F0F0B").RowColumn(6,2)
+        self.nether_chunk_x = Label(self, "000", width=70, fg_color="#580000").RowColumn(6,3)
+        self.nether_chunk_y = Label(self, "000", width=70, fg_color="#580000").RowColumn(6,4)
+        
 
 class App(ctk.CTk):
     def __init__(self):
@@ -52,7 +47,7 @@ class App(ctk.CTk):
 
         self.content_manual = self.tabs.Add("Manual") 
         self.content_paste  = self.tabs.Add("F3 + C") 
-        self.content_option  = self.tabs.Add("Option") 
+        self.content_view  = self.tabs.Add("View") 
         self.content_about  = self.tabs.Add("About") 
 
         self.tab_manual_input = Panel(self.content_manual, fg_color="#333")
@@ -65,30 +60,23 @@ class App(ctk.CTk):
         self.tab_paste_event = Panel(self.content_paste, fg_color="#1a1a1a")
         self.tab_paste_event.pack(fill="x", expand=True)
 
-        self.panel_option = Panel(self.content_option, fg_color="#333")
-        self.panel_option.pack(fill="x", expand=True)
+        self.tab_option = Panel(self.content_view, fg_color="#333")
+        self.tab_option.pack(fill="x", expand=True)
         
-        self.panel_about = Panel(self.content_about, fg_color="#333")
-        self.panel_about.pack(fill="x", expand=True)
+        self.tab_about = Panel(self.content_about, fg_color="#333")
+        self.tab_about.pack(fill="x", expand=True)
         
 
         # ============================================================ #
         # ======================== Menu Option ======================== #
         # ============================================================ #
 
-        Label(self.panel_option, text="Username").RowColumn(1, 0)
-        Input(self.panel_option).RowColumn(1, 1)
-        Label(self.panel_option, text="Email").RowColumn(2, 0)
-        Input(self.panel_option).RowColumn(2, 1)
-        Label(self.panel_option, text="Password").RowColumn(3, 0)
-        Input(self.panel_option).RowColumn(3, 1)
-
         # ============================================================ #
         # ======================== Menu About ======================== #
         # ============================================================ #
         desc_about = "aplikasi yang bisa menghitung karkurasi\n matematik menggunakan metode segitiga derajat "
-        Label(self.panel_about, text="About", anchor="center", width=400).RowColumn(1, 0)
-        Label(self.panel_about, text=desc_about, width=400).RowColumn(2, 0)
+        Label(self.tab_about, text="About", anchor="center", width=400).RowColumn(1, 0)
+        Label(self.tab_about, text=desc_about, width=400).RowColumn(2, 0)
         # ============================================================ #
         # ======================== Menu Manual ======================== #
         # ============================================================ #
@@ -146,6 +134,7 @@ class App(ctk.CTk):
 
         # Label : Panel Output
         # ==================================
+        # Screen.event(self.panel_hasil)
         Label(self.panel_hasil, "Dimension", width=120, fg_color="#0e7490").RowColumn(4,0)
         Label(self.panel_hasil, "Block", width=140, fg_color="#0e7490").RowColumn(4,1).Span(0, 2)
         Label(self.panel_hasil, "Chunk", width=140, fg_color="#0e7490").RowColumn(4,3).Span(0, 2)
